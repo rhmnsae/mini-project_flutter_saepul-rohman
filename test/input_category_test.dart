@@ -5,7 +5,7 @@ import 'package:simple_todo_list/Providers/add_todo_provider.dart';
 import 'package:simple_todo_list/Pages/Views/widgets/input_category.dart';
 
 void main() {
-  testWidgets('UI Testing for CategoryInput', (WidgetTester tester) async {
+  testWidgets('CategoryInput UI Test', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: ChangeNotifierProvider(
