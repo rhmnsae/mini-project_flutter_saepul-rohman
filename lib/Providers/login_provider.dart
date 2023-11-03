@@ -14,7 +14,7 @@ class LoginProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  /// Metode untuk mengubah status login menjadi true
+  /// Metode untuk mengubah status login menjadi true (gagal)
   void setLoginTrue() {
     _isLoginTrue = true; // Mengubah status login
     notifyListeners();
