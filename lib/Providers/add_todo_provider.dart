@@ -3,7 +3,7 @@ import 'package:simple_todo_list/Models/db_helper.dart';
 import 'package:simple_todo_list/Models/todo_model.dart';
 
 class TodoProvider extends ChangeNotifier {
-  int _priority = 1; // Prioritas default adalah 1 (misalnya, rendah)
+  int _priority = 1; // Prioritas default adalah 1
   int get priority => _priority; // Getter untuk mendapatkan nilai prioritas
 
   /// Fungsi untuk mengatur nilai prioritas
