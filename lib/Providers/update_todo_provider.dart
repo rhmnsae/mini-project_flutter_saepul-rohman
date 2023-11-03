@@ -17,6 +17,4 @@ class UpdateTodoProvider with ChangeNotifier {
     databaseHelper.update(todo); // Memanggil fungsi pembaruan di database
     notifyListeners(); // Memberitahukan perubahan data
   }
-
-  void updateTodoWithImage(Todo todo, DatabaseHelper databaseHelper) {}
 }
