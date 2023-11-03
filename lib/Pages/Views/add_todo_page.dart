@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +17,7 @@ import 'package:iconsax/iconsax.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+/// Kelas untuk menambahkan tugas baru
 class AddTodo extends StatefulWidget {
   final Future<List<Todo>> noteslist;
   const AddTodo({required this.noteslist, Key? key}) : super(key: key);
@@ -43,7 +43,6 @@ class _AddTodoState extends State<AddTodo> {
     super.initState();
     databaseHelper = DatabaseHelper();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +93,12 @@ class _AddTodoState extends State<AddTodo> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 40, horizontal: 25),
+
+                /// Menggunakan Consumer dari provider untuk mendapatkan state dari TodoProvider
                 child: Consumer<TodoProvider>(
                   builder: (BuildContext context, value, Widget? child) {
                     return ElevatedButton(
                       onPressed: () {
-
                         if (kDebugMode) {
                           print('inside add todo');
                         }
@@ -107,10 +107,12 @@ class _AddTodoState extends State<AddTodo> {
                           Snackbar.showSnackBar(
                               context, 'Please fill in the title');
                         } else {
+                          // menyimpan waktu pada saat ini
                           var now = DateTime.now();
                           var formatter = DateFormat('dd-MM-yyyy');
                           String formattedDate = formatter.format(now);
 
+                          /// Menambahkan tugas baru ke daftar tugas
                           value.addTodo(
                             Todo(
                               title: titleController.text.toString(),
@@ -125,7 +127,9 @@ class _AddTodoState extends State<AddTodo> {
                             databaseHelper,
                           );
 
+                          // Setelah tugas ditambahkan ada snackbar
                           Snackbar.showSnackBar(context, 'Added successfully');
+                          // Setelah tugas ditambahkan, pindahkan ke halaman TodoPage
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

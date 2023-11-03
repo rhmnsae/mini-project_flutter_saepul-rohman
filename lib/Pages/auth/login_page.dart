@@ -23,8 +23,10 @@ class _LoginScreenState extends State<LoginPage> {
 
   bool isVisible = false;
 
+  // mengaksses fungsi-fungsi database
   final db = DatabaseHelper();
 
+  // mengidentifikasi form
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -32,7 +34,7 @@ class _LoginScreenState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF352F44),
       body: ChangeNotifierProvider(
-        create: (context) => LoginProvider(), // Initialize the provider
+        create: (context) => LoginProvider(), // Inisialisasi provider
         child: Consumer<LoginProvider>(
           builder: (context, provider, child) {
             return Center(
@@ -54,7 +56,8 @@ class _LoginScreenState extends State<LoginPage> {
                           ),
                         ),
                         const SizedBox(height: 25),
-                        // Username input field
+
+                        /// Input field untuk username
                         Container(
                           margin: const EdgeInsets.all(8),
                           padding: const EdgeInsets.symmetric(
@@ -89,7 +92,8 @@ class _LoginScreenState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        // Password input field
+
+                        /// Input field untuk password
                         Container(
                           margin: const EdgeInsets.all(8),
                           padding: const EdgeInsets.symmetric(
@@ -137,6 +141,8 @@ class _LoginScreenState extends State<LoginPage> {
                           ),
                         ),
                         const SizedBox(height: 10),
+
+                        /// Login Button
                         Container(
                           height: 55,
                           width: MediaQuery.of(context).size.width * 0.2,
@@ -146,7 +152,7 @@ class _LoginScreenState extends State<LoginPage> {
                           child: TextButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                // Use login function by passing the provider
+                                // Menggunakan fungsi login dengan meneruskan provider
                                 login(context.read<LoginProvider>());
                               }
                             },
@@ -160,7 +166,8 @@ class _LoginScreenState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        // Sign-up button
+
+                        /// sign up
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -173,7 +180,7 @@ class _LoginScreenState extends State<LoginPage> {
                             ),
                             TextButton(
                               onPressed: () {
-                                //Navigate to sign up
+                                //Navigasi ke halaman sign-up
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -209,16 +216,19 @@ class _LoginScreenState extends State<LoginPage> {
     );
   }
 
-  // Function to handle login attempt
+  // Fungsi untuk menangani percobaan login
   void login(LoginProvider provider) async {
+    // Memanggil metode login pada database untuk memeriksa kecocokan username dan password
     var response = await db
         .login(Users(usrName: username.text, usrPassword: password.text));
 
+    // Jika respon dari proses login adalah benar (true), maka arahkan pengguna ke halaman tugas (TodoPage)
     if (response == true) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const TodoPage()));
     } else {
-      provider.setLoginTrue(); // Update the state using the provider
+      provider
+          .setLoginTrue(); // Memperbarui status menggunakan provider jika login gagal
     }
   }
 }

@@ -3,8 +3,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// Widget untuk input tanggal yang berisi field untuk memilih tanggal
 class DateInput extends StatelessWidget {
-  final TextEditingController dateController;
+  final TextEditingController
+      dateController; // Controller untuk mengelola input tanggal
 
   const DateInput({required this.dateController, Key? key}) : super(key: key);
 
@@ -27,6 +29,8 @@ class DateInput extends StatelessWidget {
               fontSize: 19,
               color: const Color(0xFFFAF0E6),
             ),
+
+            /// Menghubungkan controller untuk input
             controller: dateController,
             cursorColor: const Color(0xFFB9B4C7),
             decoration: InputDecoration(
@@ -37,17 +41,18 @@ class DateInput extends StatelessWidget {
                 color: const Color(0xFFB9B4C7),
               ),
               suffixIcon: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.end, // Untuk menggeser ke kanan
+                mainAxisAlignment: MainAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
                     onTap: () {
+                      /// Menampilkan pemilih tanggal ketika ikon kalender ditekan.
                       showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2050),
+                        firstDate: DateTime
+                            .now(), //tanggal yang bisa di input (sekarang
+                        lastDate: DateTime(2050), //sampai 2050
                         initialDatePickerMode:
                             DatePickerMode.day, // Menetapkan mode awal ke 'day'
                         selectableDayPredicate: (DateTime dateTime) {
@@ -56,7 +61,6 @@ class DateInput extends StatelessWidget {
                         builder: (BuildContext context, Widget? child) {
                           return Theme(
                             data: ThemeData.light().copyWith(
-                              // Setel data tema sesuai kebutuhan Anda
                               colorScheme: const ColorScheme.light(
                                 primary: Color(0xFF352F44),
                               ),
@@ -70,6 +74,7 @@ class DateInput extends StatelessWidget {
                       ).then((pickedDate) {
                         if (pickedDate != null) {
                           dateController.text =
+                              // Format tanggal dan masukkan ke dalam input.
                               DateFormat('dd-MM-yyyy').format(pickedDate);
                         }
                       });

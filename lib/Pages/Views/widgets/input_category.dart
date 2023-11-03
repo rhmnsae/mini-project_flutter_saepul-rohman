@@ -16,10 +16,11 @@ class CategoryInput extends StatelessWidget {
               // Prioritas tinggi (High)
               GestureDetector(
                 onTap: () {
-                  value.setPriority(1);
+                  value.setPriority(1); // Set prioritas 1 (High) 
                 },
                 child: Stack(
                   children: [
+                    // Lingkaran luar sebagai penanda prioritas
                     CircleAvatar(
                       radius: 15,
                       backgroundColor: value.priority == 1
@@ -28,6 +29,7 @@ class CategoryInput extends StatelessWidget {
                       child: value.priority == 1
                           ? const Stack(
                               children: [
+                                // Lingkaran kecil di dalam untuk penanda prioritas yang dipilih
                                 CircleAvatar(
                                   radius: 11,
                                   backgroundColor: Color(0xFFC70D3A),
@@ -43,7 +45,7 @@ class CategoryInput extends StatelessWidget {
               // Prioritas sedang (Medium)
               GestureDetector(
                 onTap: () {
-                  value.setPriority(2);
+                  value.setPriority(2); // Set prioritas menjadi 2 (Medium)
                 },
                 child: Stack(
                   children: [
@@ -70,7 +72,7 @@ class CategoryInput extends StatelessWidget {
               // Prioritas rendah (Low)
               GestureDetector(
                 onTap: () {
-                  value.setPriority(3);
+                  value.setPriority(3); // Set prioritas menjadi 3 (Low)
                 },
                 child: Stack(
                   children: [

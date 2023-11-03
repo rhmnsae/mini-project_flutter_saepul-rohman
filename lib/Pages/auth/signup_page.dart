@@ -53,7 +53,8 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         const SizedBox(height: 25),
-                        // Username input field
+
+                        /// Input field untuk username
                         Container(
                           margin: const EdgeInsets.all(8),
                           padding: const EdgeInsets.symmetric(
@@ -88,7 +89,8 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
-                        // Password input field
+
+                        /// Input field untuk password
                         Container(
                           margin: const EdgeInsets.all(8),
                           padding: const EdgeInsets.symmetric(
@@ -136,8 +138,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
 
-                        /// Confirm Password input field
-
+                        /// Input field untuk konfirmasi password
                         Container(
                           margin: const EdgeInsets.all(8),
                           padding: const EdgeInsets.symmetric(
@@ -224,6 +225,8 @@ class _SignUpState extends State<SignUp> {
                                 fontSize: 15,
                               ),
                             ),
+
+                            /// Login
                             TextButton(
                               onPressed: () {
                                 Navigator.push(
@@ -255,14 +258,20 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
+  /// Fungsi untuk menangani proses pendaftaran akun baru
   void signUp(SignUpProvider provider) async {
     final db = DatabaseHelper();
+
+    // Melakukan pendaftaran dengan menggunakan nilai dari input username dan password
     await db.signup(Users(
       usrName: username.text,
       usrPassword: password.text,
     ));
 
+    // Mengatur status keberhasilan pendaftaran menggunakan provider
     provider.setSignUpSuccess();
+
+    // Jika pendaftaran sukses, navigasikan pengguna ke halaman login
     if (provider.isSignUpSuccess) {
       Navigator.push(
         context,

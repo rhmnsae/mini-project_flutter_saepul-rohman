@@ -10,10 +10,11 @@ class BottomSheet {
   static void showCustomBottomSheet(BuildContext context) {
     TextEditingController textController = TextEditingController();
 
-    bool isLoading = false; // State to manage loading
+    bool isLoading = false; // State untuk mengelola loading
 
-    final currentContext = context; // Capture the context
+    final currentContext = context; // Menangkap konteks saat ini
 
+    /// Bottom sheet
     showModalBottomSheet(
       backgroundColor: const Color(0xFFB9B4C7),
       isScrollControlled: true,
@@ -93,14 +94,14 @@ class BottomSheet {
                           );
                         } else {
                           setState(() {
-                            isLoading = true; // Set loading state to true
+                            isLoading = true; // Set loading menjadi true
                           });
                           final result = await RecommendationService
                               .getTugasRecomendations(
                             tugas: textController.text,
                           );
                           setState(() {
-                            isLoading = false; // Set loading state to false
+                            isLoading = false; // Set loading menjadi false
                           });
                           Navigator.of(sheetContext).pop();
                           Navigator.of(currentContext).push(
@@ -115,6 +116,7 @@ class BottomSheet {
                           );
                         }
                       } catch (e) {
+                        /// saat tidak terhubung ke api
                         showDialog(
                           context: sheetContext,
                           builder: (BuildContext dialogContext) {
@@ -155,11 +157,12 @@ class BottomSheet {
                         );
                       }
                     },
+                    // Menampilkan indikator loading
                     icon: isLoading
                         ? const CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation<Color>(
                                 Color(0xFF352F44)),
-                          ) // Show loading indicator
+                          )
                         : const Icon(Iconsax.send_1),
                     color: const Color(0xFF352F44),
                   ),

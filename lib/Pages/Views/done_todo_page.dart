@@ -44,21 +44,24 @@ class _DonePageState extends State<DonePage> {
         centerTitle: true,
       ),
       backgroundColor: const Color(0xFF352F44),
+
+      /// Consumer untuk mendapatkan state dari DoneTodoProvider
       body: Consumer<DoneTodoProvider>(
         builder: (context, doneTasksModel, child) {
           final completedTasks = doneTasksModel.completedTasks;
 
+          /// Tampilan ketika tidak ada tugas yang selesai
           return completedTasks.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(
-                        Iconsax.note_1, // Ikon yang ingin Anda tampilkan
-                        color:  Color(0xFF5C5470), // Warna ikon
-                        size: 45, // Ukuran ikon
+                        Iconsax.note_1,
+                        color: Color(0xFF5C5470),
+                        size: 45,
                       ),
-                      const SizedBox(height: 25), // Spasi antara ikon dan teks
+                      const SizedBox(height: 25),
                       Text(
                         'No completed tasks',
                         style: GoogleFonts.firaCode(
@@ -71,11 +74,14 @@ class _DonePageState extends State<DonePage> {
                   ),
                 )
               : ListView.builder(
+                  /// Menampilkan daftar tugas yang telah selesai
                   itemCount: completedTasks.length,
                   itemBuilder: (context, index) {
                     final task = completedTasks[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
+
+                      /// Widget Card untuk menampilkan tugas yang telah selesai
                       child: Card(
                         color: const Color(0xFF5C5470),
                         child: Column(

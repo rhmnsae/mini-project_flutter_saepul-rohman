@@ -31,7 +31,7 @@ class _SplashAnimationState extends State<SplashAnimation> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(
-            bottom: 100.0, // Sesuaikan nilai ini sesuai kebutuhan
+            bottom: 100.0,
           ),
           child: DefaultTextStyle(
             style: GoogleFonts.firaCode(

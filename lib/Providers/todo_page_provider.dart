@@ -6,7 +6,7 @@ class PageTodoProvider with ChangeNotifier {
   // Getter untuk filter
   get filter => _filter;
 
-  // Fungsi untuk mengubah filter
+  /// Fungsi untuk mengubah filter
   void addFilter(String val) {
     _filter = val; // Mengganti nilai filter dengan nilai yang diberikan
     notifyListeners(); // Memberitahukan perubahan data

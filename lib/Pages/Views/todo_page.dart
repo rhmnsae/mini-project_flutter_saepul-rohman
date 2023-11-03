@@ -206,26 +206,34 @@ class _TodoPageState extends State<TodoPage> {
               height: 10,
             ),
 
-            /// Pilihan Kategori
+            /// Card
             Consumer<PageTodoProvider>(
+              // Consumer untuk mendapatkan state dari PageTodoProvider
               builder: (BuildContext context, value, Widget? child) {
+                // Mengembalikan tampilan yang bergantung pada state terbaru
                 return Expanded(
+                  // listview builder menyesuaikan ukuran
                   child: FutureBuilder(
                     future: todoList,
                     builder: (context, AsyncSnapshot<List<Todo>> snapshot) {
                       if (snapshot.hasData) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
+                          // Menampilkan indikator loading
                           return const Center(
                               child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
+                          // Menampilkan pesan error jika terdapat kesalahan
                           return Center(
                               child: Text('Error: ${snapshot.error}'));
                         } else if (!snapshot.hasData ||
                             snapshot.data!.isEmpty) {
+                          // Menampilkan pesan jika tidak ada data
                           return Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+
+                              /// Tampilan ketika tidak ada tugas yang ditambahkan
                               children: [
                                 const Icon(
                                   Iconsax.additem,
@@ -251,6 +259,7 @@ class _TodoPageState extends State<TodoPage> {
                             ),
                           );
                         } else {
+                          /// Logika untuk menampilkan daftar tugas berdasarkan kategori
                           List<Todo> filteredNotes = snapshot.data!;
                           if (value.filter == 'high') {
                             // Menyaring catatan berdasarkan kategori tinggi (high)
@@ -299,7 +308,7 @@ class _TodoPageState extends State<TodoPage> {
                                           filteredNotes[index].time.toString(),
                                     );
 
-                                    // Navigasi ke halaman ViewTodo
+                                    // Navigasi ke halaman ViewTodo jika dipilih
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -311,6 +320,8 @@ class _TodoPageState extends State<TodoPage> {
                                       ),
                                     );
                                   },
+
+                                  /// Jika tugas ditekan maka tugas selesai
                                   child: GestureDetector(
                                     onLongPress: () async {
                                       Todo todoToUpdate = filteredNotes[index];
@@ -325,6 +336,8 @@ class _TodoPageState extends State<TodoPage> {
                                             todoToUpdate; // Mengupdate tampilan saat status berubah
                                       });
                                     },
+
+                                    /// Tampilan Card
                                     child: Card(
                                       color: const Color(0xFF5C5470),
                                       child: Column(
@@ -476,6 +489,7 @@ class _TodoPageState extends State<TodoPage> {
           spaceBetweenChildren: 10,
           childPadding: const EdgeInsets.all(4),
           children: [
+            /// Add Todo
             SpeedDialChild(
               backgroundColor: const Color(0xFF5C5470),
               foregroundColor: const Color(0xFFB9B4C7),
@@ -498,6 +512,8 @@ class _TodoPageState extends State<TodoPage> {
                 );
               },
             ),
+
+            /// Rekomendasi AI
             SpeedDialChild(
               backgroundColor: const Color(0xFF5C5470),
               foregroundColor: const Color(0xFFB9B4C7),
@@ -510,7 +526,7 @@ class _TodoPageState extends State<TodoPage> {
               ),
               onTap: () {
                 custom_bottom_sheet.BottomSheet.showCustomBottomSheet(
-                    context); // Memanggil bottom sheet di sini
+                    context); // Memanggil bottom sheet 
               },
             ),
             // Tambahkan SpeedDialChild lain jika diperlukan

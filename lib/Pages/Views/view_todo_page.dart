@@ -37,7 +37,7 @@ class _ViewNotesState extends State<ViewTodo> {
   @override
   Widget build(BuildContext context) {
     if (kDebugMode) {
-      print('build'); // Output debug jika dalam mode debug
+      print('build');
     }
     return Scaffold(
       resizeToAvoidBottomInset:
@@ -55,15 +55,17 @@ class _ViewNotesState extends State<ViewTodo> {
         ),
         actions: [
           /// Delete
+          /// Consumer untuk pengelolaan fungsi penghapusan tugas
           Consumer<DeleteTodoProvider>(
             builder: (BuildContext context, value, Widget? child) {
               return IconButton(
                 onPressed: () async {
+                  // saat menghapus maka akan ada show dialog terlebih dahulu
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        backgroundColor: const Color(0xFFB9B4C7), 
+                        backgroundColor: const Color(0xFFB9B4C7),
                         title: Text(
                           'Delete Task',
                           style: GoogleFonts.firaCode(
@@ -105,10 +107,13 @@ class _ViewNotesState extends State<ViewTodo> {
                               if (kDebugMode) {
                                 print('icon di dalam');
                               }
+                              // Menghapus tugas dengan memanggil method deleteTodo
                               value.deleteTodo(
                                   databaseHelper!, widget.todolist.id!);
+                              // Menampilkan snackbar setelah tugas dihapus
                               Snackbar.showSnackBar(
                                   context, 'Deleted successfully');
+                              // Kembali ke halaman TodoPage setelah tugas dihapus
                               await Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -133,6 +138,7 @@ class _ViewNotesState extends State<ViewTodo> {
           /// Edit
           IconButton(
             onPressed: () {
+              // Pindah ke halaman edit ketika tombol edit ditekan
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -141,7 +147,7 @@ class _ViewNotesState extends State<ViewTodo> {
                     todolist: widget.todolist,
                   ),
                 ),
-              ); // Pindah ke halaman edit ketika tombol edit ditekan
+              );
             },
             icon: const Icon(
               Iconsax.edit,
@@ -170,14 +176,14 @@ class _ViewNotesState extends State<ViewTodo> {
                   height: 50,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: const Color(
-                        0xFF5C5470), // Warna latar belakang abu-abu transparan
-                    borderRadius: BorderRadius.circular(
-                        8), // Membuat sudut elemen melengkung
+                    color: const Color(0xFF5C5470),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15, vertical: 10),
+
+                    // untuk menampilkan judul yang telah di input
                     child: Text(
                       widget.todolist.title,
                       style: GoogleFonts.firaCode(
@@ -201,10 +207,11 @@ class _ViewNotesState extends State<ViewTodo> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15, vertical: 11),
+                    // untuk menampilkan subtitle yang telah di input jika tidak ada maka kosong (empty)
                     child: Text(
                       widget.todolist.subtitle.isNotEmpty
                           ? widget.todolist.subtitle
-                          : 'Empty', // Ganti dengan teks placeholder
+                          : 'Empty',
                       style: GoogleFonts.firaCode(
                         fontSize: 19,
                         color: widget.todolist.subtitle.isNotEmpty
@@ -224,7 +231,7 @@ class _ViewNotesState extends State<ViewTodo> {
                 child: Row(
                   children: [
                     CircleAvatar(
-                        radius: 15, // Ukuran radius avatar lingkaran
+                        radius: 15,
                         backgroundColor: widget.todolist.priority == 1
                             ? const Color(0xFFC70D3A)
                             : widget.todolist.priority == 2
@@ -248,10 +255,11 @@ class _ViewNotesState extends State<ViewTodo> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 15),
+                    // untuk menampilkan deskripsi yang telah di input jika tidak ada maka kosong (empty)
                     child: Text(
                       widget.todolist.description.isNotEmpty
                           ? widget.todolist.description
-                          : 'Empty', // Ganti dengan teks placeholder
+                          : 'Empty',
                       style: GoogleFonts.firaCode(
                         fontSize: 19,
                         color: widget.todolist.description.isNotEmpty
@@ -283,7 +291,7 @@ class _ViewNotesState extends State<ViewTodo> {
                         Text(
                           widget.todolist.date2.isNotEmpty
                               ? widget.todolist.date2
-                              : 'Empty', // Ganti dengan teks placeholder
+                              : 'Empty',
                           style: GoogleFonts.firaCode(
                             fontSize: 19,
                             color: widget.todolist.date2.isNotEmpty
@@ -321,7 +329,7 @@ class _ViewNotesState extends State<ViewTodo> {
                         Text(
                           widget.todolist.time.isNotEmpty
                               ? widget.todolist.time
-                              : 'Empty', // Ganti dengan teks placeholder
+                              : 'Empty',
                           style: GoogleFonts.firaCode(
                             fontSize: 19,
                             color: widget.todolist.time.isNotEmpty

@@ -111,6 +111,7 @@ class _EditTodoState extends State<EditTodo> {
 
                 /// Save
                 Consumer<UpdateTodoProvider>(
+                  // Consumer dari UpdateTodoProvider untuk mendapatkan state terbaru
                   builder: (BuildContext context, value, Widget? child) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
@@ -127,7 +128,7 @@ class _EditTodoState extends State<EditTodo> {
                             String formattedDate = formatter.format(now);
 
                             if (databaseHelper != null) {
-                              // Mengupdate catatan
+                              // Mengupdate catatan dengan nilai baru
                               value.updateTodo(
                                 Todo(
                                   id: widget.todolist.id,
@@ -143,7 +144,7 @@ class _EditTodoState extends State<EditTodo> {
                                 databaseHelper!,
                               );
 
-                              // Menampilkan snackbar
+                              // Menampilkan snackbar jika berhasil
                               Snackbar.showSnackBar(
                                   context, 'updated successfully');
                               // Kembali ke halaman TodoPage setelah catatan diperbarui

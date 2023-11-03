@@ -3,7 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TimeInput extends StatelessWidget {
-  final TextEditingController timeController;
+  final TextEditingController timeController; // Controller untuk input waktu
 
   const TimeInput({required this.timeController, Key? key}) : super(key: key);
 
@@ -26,6 +26,8 @@ class TimeInput extends StatelessWidget {
               fontSize: 19,
               color: const Color(0xFFFAF0E6),
             ),
+
+            /// Menghubungkan controller untuk input waktu
             controller: timeController,
             cursorColor: const Color(0xFFB9B4C7),
             decoration: InputDecoration(
@@ -36,15 +38,16 @@ class TimeInput extends StatelessWidget {
                 color: Color(0xFFB9B4C7),
               ),
               suffixIcon: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.end, // Untuk menggeser ke kanan
+                mainAxisAlignment: MainAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
                     onTap: () {
+                      /// Menampilkan pemilih waktu saat ikon jam ditekan
                       showTimePicker(
                         context: context,
-                        initialTime: TimeOfDay.now(),
+                        initialTime:
+                            TimeOfDay.now(), // Waktu awal saat pemilih waktu
                         builder: (BuildContext context, Widget? child) {
                           return Theme(
                             data: ThemeData.light().copyWith(
@@ -61,12 +64,13 @@ class TimeInput extends StatelessWidget {
                       ).then((pickedTime) {
                         if (pickedTime != null) {
                           timeController.text = pickedTime.format(context);
+                          // Masukkan waktu yang dipilih ke dalam input
                         }
                       });
                     },
                     child: const Icon(
                       Iconsax.clock,
-                      color: Color(0xFFB9B4C7), // Sesuaikan warna ikon
+                      color: Color(0xFFB9B4C7),
                     ),
                   ),
                 ],

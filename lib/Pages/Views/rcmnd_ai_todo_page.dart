@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RecomendationAi extends StatelessWidget {
+  // Data yang diperoleh dari OpenAI untuk ditampilkan
   final GptData gptResponseData;
 
   const RecomendationAi({super.key, required this.gptResponseData});
@@ -33,11 +34,13 @@ class RecomendationAi extends StatelessWidget {
       ),
       backgroundColor: const Color(0xFF352F44),
       body: ListView.builder(
+        // Jumlah item yang ditampilkan
         itemCount: gptResponseData.choices.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: SelectableText(
+              // Teks rekomendasi AI
               gptResponseData.choices[index].text,
               textAlign: TextAlign.justify,
               style: GoogleFonts.firaCode(
